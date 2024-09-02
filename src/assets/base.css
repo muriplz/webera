@@ -7,8 +7,16 @@
 :root {
   --color-background: #ADA296;
   --background-soft: #B06212;
+  --background-lighter: #B6C197;
 
   --color-text: #212738;
+
+  --pantone-171C: #ff673b;
+  --pantone-black: #000000;
+  --pantone-2645C: #ad96db;
+  --pantone-100: #f5eb61;
+  --pantone-333: #3ddbbf;
+  --pantone-2726C: #475cc7;
 }
 
 #app {
