@@ -30,9 +30,9 @@ const hasBackground = computed(() => !isAtTop.value);
       <transition name="background-transition">
         <div v-show="true" :class="{ 'background-visible': !isAtTop, 'background-hidden': isAtTop }" class="background"></div>
       </transition>
-      <GrayLogo :class="{ 'black-color': hasBackground }" class="logo"/>
-      <p :class="{ 'black-color': hasBackground }" class="title">eraeyewear.com</p>
-      <LanguageSelector class="language-selector"/>
+      <GrayLogo :class="{ 'text-color': hasBackground }" class="logo"/>
+      <p :class="{ 'text-color': hasBackground }" class="title">eraeyewear.com</p>
+      <LanguageSelector :put-secondary="hasBackground" secondary-color="var(--pantone-2726C)" class="language-selector"/>
     </header>
   </transition>
 </template>
@@ -65,6 +65,9 @@ header {
   transition: transform 0.3s ease;
 }
 
+.text-color {
+  color: var(--pantone-2726C) !important;
+}
 .background-visible {
   transform: translateY(0);
 }
@@ -89,16 +92,13 @@ header {
 }
 
 .logo:hover {
-  color: #817f7f;
+  color: var(--background-lighter);
   transform: scale(1.07);
-}
-
-.black-color {
-  color: black;
 }
 
 .language-selector {
   margin-right: 20px;
+
 }
 
 .header-transition-enter-active,

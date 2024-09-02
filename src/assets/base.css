@@ -6,10 +6,10 @@
 /* semantic color variables for this project */
 :root {
   --color-background: #ADA296;
-  --background-soft: #B06212;
-  --background-lighter: #B6C197;
+  --background-soft: var(--pantone-171C);
+  --background-lighter: var(--pantone-100);
 
-  --color-text: #212738;
+  --color-text: var(--pantone-black);
 
   --pantone-171C: #ff673b;
   --pantone-black: #000000;

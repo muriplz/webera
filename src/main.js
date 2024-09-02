@@ -14,7 +14,6 @@ const savedLanguage = localStorage.getItem('language') || browserLanguage || 'en
 export const i18n = createI18n({
     legacy: false,
     locale: savedLanguage,
-    fallbackLocale: 'en',
     globalInjection: true,
     messages: {
         en: enMessages,

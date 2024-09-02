@@ -1,6 +1,5 @@
 // src/components/pages/home/Slogan.vue
 <script setup>
-import EnteringText from "@/components/animations/EnteringText.vue";
 import EnteringWrapper from "@/components/animations/EnteringWrapper.vue";
 </script>
 
