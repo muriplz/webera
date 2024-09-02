@@ -1,0 +1,51 @@
+@import url(https://fonts.bunny.net/css?family=sora:200); /* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --color-text: #fff;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: #ADA296;
+  --background-soft: #B06212;
+
+  --color-text: #212738;
+}
+
+#app {
+  font-family: 'Sora', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
