@@ -1,5 +1,36 @@
 import os
 from PIL import Image
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+def convert_image(file_path, output_file_path):
+    try:
+        # Open the image and convert it to WEBP
+        with Image.open(file_path) as img:
+            img.save(output_file_path, 'WEBP')
+        print(f"Converted: {file_path} -> {output_file_path}")
+    except Exception as e:
+        print(f"Failed to convert {file_path}: {e}")
+
+def process_directory(root, files, output_path):
+    file_counter = 1
+    futures = []
+    
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        for file in files:
+            if (file.lower().endswith('.png') or file.lower().endswith('.jpg') or file.lower().endswith('.jpeg')) and not file.startswith('._'):
+                # Define the full file paths
+                file_path = os.path.join(root, file)
+                output_file_path = os.path.join(output_path, f"{file_counter}.webp")
+
+                # Submit the conversion task to the thread pool
+                futures.append(executor.submit(convert_image, file_path, output_file_path))
+                
+                # Increment the counter after submitting the task
+                file_counter += 1
+
+        # Wait for all threads to complete
+        for future in as_completed(futures):
+            future.result()
 
 def convert_images_to_webp(source_dir, output_dir):
     # Ensure the output directory exists
@@ -8,9 +39,6 @@ def convert_images_to_webp(source_dir, output_dir):
 
     # Walk through the source directory
     for root, dirs, files in os.walk(source_dir):
-        # Initialize a counter for the output file names for each folder
-        file_counter = 1
-
         # Create corresponding directories in the output folder
         relative_path = os.path.relpath(root, source_dir)
         output_path = os.path.join(output_dir, relative_path)
@@ -20,23 +48,7 @@ def convert_images_to_webp(source_dir, output_dir):
         print(f"Processing directory: {root}")
         print(f"Output directory: {output_path}")
 
-        for file in files:
-            if (file.lower().endswith('.png') or file.lower().endswith('.jpg') or file.lower().endswith('.jpeg')) and not file.startswith('._'):
-                # Define the full file paths
-                file_path = os.path.join(root, file)
-                output_file_path = os.path.join(output_path, f"{file_counter}.webp")
-
-                print(f"Converting file: {file_path}")
-                print(f"Saving as: {output_file_path}")
-
-                try:
-                    # Open the image and convert it to WEBP
-                    with Image.open(file_path) as img:
-                        img.save(output_file_path, 'WEBP')
-                    # Increment the counter after a successful conversion
-                    file_counter += 1
-                except Exception as e:
-                    print(f"Failed to convert {file_path}: {e}")
+        process_directory(root, files, output_path)
 
 # Define the source and output directories
 source_directory = 'GAFAS'
