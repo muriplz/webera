@@ -33,7 +33,7 @@ const props = defineProps({
 });
 
 const { locale } = useI18n({ useScope: 'global' });
-const languages = ref(['EN', 'ES']);
+const languages = ref(['EN', 'ES', 'FR', 'DE', 'IT', 'PT', 'RU', 'ZH']);
 const currentLanguage = ref(locale.value.toUpperCase());
 const dropdownVisible = ref(false);
 
@@ -104,6 +104,7 @@ h3 {
   border-radius: 7px;
   overflow: hidden;
   transition: height 0.3s ease-out;
+  text-align: center;
 }
 
 .dropdown li {
@@ -111,6 +112,8 @@ h3 {
   padding: 5px 14px;
   user-select: none;
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 .dropdown li:hover {
@@ -121,5 +124,19 @@ h3 {
 .language-selector h3 {
   width: 50px;
   display: inline-block;
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.07);
+  }
+}
+
+.language-selector h3:hover {
+  color: var(--background-lighter) !important;
+  animation: scale-up 0.3s forwards;
 }
 </style>
