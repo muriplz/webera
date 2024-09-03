@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, defineProps } from 'vue';
+import {ref, onMounted, onUnmounted, computed, defineProps, watch} from 'vue';
 import CarrouselItem from "@/components/pages/home/CarrouselItem.vue";
 
 const props = defineProps({
@@ -26,12 +26,18 @@ const totalWidth = computed(() => props.items.length * itemWidth);
 
 const displayItems = ref([...props.items, ...props.items, ...props.items]);
 
+watch(() => props.items, (newItems) => {
+  displayItems.value = [...newItems, ...newItems, ...newItems];
+  console.log('Updated displayItems:', displayItems.value); // Debugging
+});
+
 const scrollPosition = ref(0);
 let scrollInterval = null;
 
 const startScroll = () => {
   scrollInterval = setInterval(() => {
-    scrollPosition.value += props.scrollDirection === 'right' ? 2 : -2;
+    const speed = props.scrollDirection === 'right' ? 2 : 3;
+    scrollPosition.value += props.scrollDirection === 'right' ? speed : -speed;
     if (scrollPosition.value >= totalWidth.value * 2) {
       scrollPosition.value -= totalWidth.value;
     } else if (scrollPosition.value < 0) {

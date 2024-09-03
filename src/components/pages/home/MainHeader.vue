@@ -30,9 +30,9 @@ const hasBackground = computed(() => !isAtTop.value);
       <transition name="background-transition">
         <div v-show="true" :class="{ 'background-visible': !isAtTop, 'background-hidden': isAtTop }" class="background"></div>
       </transition>
-      <GrayLogo :class="{ 'text-color': hasBackground }" class="logo"/>
-      <p :class="{ 'text-color': hasBackground }" class="title">eraeyewear.com</p>
-      <LanguageSelector :put-secondary="hasBackground" secondary-color="var(--pantone-2726C)" class="language-selector"/>
+      <GrayLogo class="logo"/>
+      <p class="title">eraeyewear.com</p>
+      <LanguageSelector :put-secondary="hasBackground" secondary-color="var(--pantone-black)" class="language-selector"/>
     </header>
   </transition>
 </template>
@@ -65,9 +65,6 @@ header {
   transition: transform 0.3s ease;
 }
 
-.text-color {
-  color: var(--pantone-2726C) !important;
-}
 .background-visible {
   transform: translateY(0);
 }
@@ -91,11 +88,6 @@ header {
   cursor: pointer;
 }
 
-.logo:hover {
-  color: var(--background-lighter);
-  transform: scale(1.07);
-}
-
 .language-selector {
   margin-right: 20px;
 
@@ -114,5 +106,29 @@ header {
 .header-transition-enter-to,
 .header-transition-leave-from {
   transform: translateY(0);
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.logo {
+  width: 190px;
+  height: 100px;
+  max-width: 100%;
+  max-height: 100%;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.1s ease;
+}
+
+.logo:hover {
+  color: var(--background-lighter);
+  animation: scale-up 0.3s forwards;
 }
 </style>

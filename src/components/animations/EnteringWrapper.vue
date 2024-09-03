@@ -25,7 +25,7 @@ onBeforeUnmount(() => {
 
 function handleIntersection(entries) {
   entries.forEach((entry) => {
-    isVisible.value = entry.isIntersecting;
+    isVisible.value = entry.intersectionRatio >= 0.99;
   });
 }
 </script>
@@ -43,16 +43,11 @@ function handleIntersection(entries) {
 </template>
 
 <style scoped>
-
 .wrapper {
-  background-color: var(--background-soft);
-  width: 80%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
-
   border-radius: 3px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .fade-slide-enter-active,
